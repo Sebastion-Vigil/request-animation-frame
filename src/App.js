@@ -11,15 +11,22 @@ export default class App extends Component {
   }
 
   moveBall = () => {
+    console.log('moveBall() invoked!')
     let start = Date.now()
     let football = document.querySelector('.circle') // -> querySelector ok 2 use in React??
     // -> purpose of storing requestAnimationFrame in timer var?
-    let timer = requestAnimationFrame(function animateBall () { // -> why timer var not used?
+    let timer = requestAnimationFrame(function animateBall () {
+      // -> why timer var not used?
       let interval = Date.now() - start
 
       football.style.top = interval / 3 + 'px' // move element down by 3px
-
-      if (interval < 1000) requestAnimationFrame(animateBall) // stop animation
+      // stop animation
+      // if (interval < 1000) requestAnimationFrame(animateBall) 
+      if (interval > 1000) {
+        cancelAnimationFrame(timer) 
+      } else {
+        requestAnimationFrame(animateBall)
+      }
     })
   }
 
@@ -60,24 +67,6 @@ export default class App extends Component {
     }
   }
 
-  // bounceBall = () => {
-  //   let bounceEaseOut = this.easeOut(this.bounce)
-  //   let start = Date.now()
-  //   let football = document.querySelector('.circle')
-  //   let id = requestAnimationFrame(function animate (time) {
-  //     console.log(time)
-  //     let interval = (Date.now() - start) / 2000
-  //     if (interval > 1) interval = 1
-
-  //     football.style.top = bounceEaseOut(interval) * 300 + 'px' // adjust the y axis
-  //     football.style.left = interval * 300 + 'px' // adjust the x axis
-
-  //     if (interval < 1) {
-  //       requestAnimationFrame(animate)
-  //     }
-  //   })
-  // }
-
   bounceBall = () => {
     this.animationHelper({
       duration: 2000,
@@ -92,7 +81,7 @@ export default class App extends Component {
 
   render () {
     return (
-      <div className='containter'>
+      <div className='container'>
         <img className='circle' alt='' onClick={this.moveBall} />
       </div>
     )
@@ -113,3 +102,21 @@ export default class App extends Component {
         }, 1000 / 60);
       }
    */
+
+// bounceBall = () => {
+//   let bounceEaseOut = this.easeOut(this.bounce)
+//   let start = Date.now()
+//   let football = document.querySelector('.circle')
+//   let id = requestAnimationFrame(function animate (time) {
+//     console.log(time)
+//     let interval = (Date.now() - start) / 2000
+//     if (interval > 1) interval = 1
+
+//     football.style.top = bounceEaseOut(interval) * 300 + 'px' // adjust the y axis
+//     football.style.left = interval * 300 + 'px' // adjust the x axis
+
+//     if (interval < 1) {
+//       requestAnimationFrame(animate)
+//     }
+//   })
+// }
