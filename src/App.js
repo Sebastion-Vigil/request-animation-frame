@@ -11,16 +11,11 @@ export default class App extends Component {
   }
 
   moveBall = () => {
-    console.log('moveBall() invoked!')
     let start = Date.now()
     let football = document.querySelector('.circle') // -> querySelector ok 2 use in React??
-    // -> purpose of storing requestAnimationFrame in timer var?
     let timer = requestAnimationFrame(function animateBall () {
-      // -> why timer var not used?
       let interval = Date.now() - start
-
       football.style.top = interval / 3 + 'px' // move element down by 3px
-      // stop animation
       // if (interval < 1000) requestAnimationFrame(animateBall) 
       if (interval > 1000) {
         cancelAnimationFrame(timer) 
@@ -83,6 +78,7 @@ export default class App extends Component {
     return (
       <div className='container'>
         <img className='circle' alt='' onClick={this.moveBall} />
+        <div className='button' ></div>
       </div>
     )
   }

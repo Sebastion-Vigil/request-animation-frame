@@ -5,6 +5,22 @@
   height: 630px;
 }
 
+.button {
+  position: absolute;
+  left: 633.5px;
+  top: 550px;
+  width: 100px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: lightblue;
+  border: 1px solid blue;
+}
+
+.button:active {
+  background-color: lightcoral;
+  border: 1px solid red;
+}
+
 .circle {
   left: 0;
   right: 0;
