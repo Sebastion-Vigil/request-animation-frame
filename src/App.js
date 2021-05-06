@@ -1,3 +1,7 @@
+// https://medium.com/swlh/beginners-guide-to-using-usestate-useeffect-react-hooks-489dd4bc8663
+// https://codepen.io/HunorMarton/pen/zYONexq
+// https://css-tricks.com/using-requestanimationframe-with-react-hooks/
+
 import React, { Component } from 'react'
 // import { render } from 'react-dom';
 import './App.css'
@@ -6,23 +10,32 @@ export default class App extends Component {
   constructor () {
     super()
     this.state = {
-      name: 'Football Animation'
+      name: 'Football Animation',
+      animationActive: false,
+      top: '0px',
     }
   }
-
-  moveBall = () => {
+  // -> dilema is how to store requestAnimationFrame id in state 
+  moveBall = () => { // -> now realize React classes are overrated
     let start = Date.now()
-    let football = document.querySelector('.circle') // -> querySelector ok 2 use in React??
+    let football = document.querySelector('.circle')
     let timer = requestAnimationFrame(function animateBall () {
       let interval = Date.now() - start
-      football.style.top = interval / 3 + 'px' // move element down by 3px
-      // if (interval < 1000) requestAnimationFrame(animateBall) 
+      football.style.top = interval / 3 + 'px'
       if (interval > 1000) {
         cancelAnimationFrame(timer) 
       } else {
         requestAnimationFrame(animateBall)
       }
     })
+  }
+
+  startAnimation = () => {
+  
+  }
+
+  stopAnimation = () => {
+
   }
 
   animationHelper ({ duration, render, interpolator }) {
@@ -77,7 +90,13 @@ export default class App extends Component {
   render () {
     return (
       <div className='container'>
-        <img className='circle' alt='' onClick={this.moveBall} />
+        <img 
+          className='circle' 
+          alt='' 
+          style={{
+            top: this.state.top
+          }}
+          />
         <div className='button' ></div>
       </div>
     )
