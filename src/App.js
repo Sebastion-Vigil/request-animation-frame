@@ -97,7 +97,7 @@ export default class App extends Component {
             top: this.state.top
           }}
           />
-        <div className='button' ></div>
+        <div className='button' onClick={this.moveBall}></div>
       </div>
     )
   }
